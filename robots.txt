@@ -44,4 +44,4 @@ Disallow: /
 User-agent: cohere-ai
 Disallow: /
 
-Sitemap: https://oneul-eodi.vercel.app/sitemap.xml
+Sitemap: https://oneul-eodi-five.vercel.app/sitemap.xml

@@ -3,7 +3,7 @@
 > **오늘 인천 어디에 떴을까?** 붕어빵·호떡·순대·꼬치·타코야키 노점과 푸드트럭 위치를
 > 동네 사람들의 '지금 있어요' 제보로 함께 채우는 정적 웹 앱입니다.
 
-- 라이브(예정) 주소: `https://oneul-eodi.vercel.app`
+- 라이브(예정) 주소: `https://oneul-eodi-five.vercel.app`
 - 빌드 없음 — `index.html`을 그대로 올리면 Vercel·Netlify·GitHub Pages 어디서든 동작합니다.
 - 초기 데이터: 인천 8개 구 **51곳** (`data/seed_places.json`, 출처 링크 포함)
 
@@ -49,7 +49,7 @@ ES 모듈을 쓰기 때문에 `file://`로 열면 동작하지 않습니다. 정
 
 1. 이 폴더를 GitHub 저장소로 올립니다(빌드 설정 없음, Framework Preset `Other`).
 2. Vercel → New Project → 저장소 import → **Build Command 비움 / Output Directory 비움**.
-3. 도메인이 `oneul-eodi.vercel.app`이 아니면 `robots.txt`·`sitemap.xml`의 주소만 바꿔 주세요.
+3. 도메인이 `oneul-eodi-five.vercel.app`이 아니면 `robots.txt`·`sitemap.xml`의 주소만 바꿔 주세요.
 
 ---
 
@@ -122,7 +122,7 @@ RLS 정책: 장소·제보·한줄평은 익명 읽기/쓰기, 건의는 **쓰�
 ## 6. 카카오맵 키 (선택)
 
 1. [Kakao Developers](https://developers.kakao.com) → 애플리케이션 추가 → **JavaScript 키** 복사.
-2. 플랫폼 → Web → 사이트 도메인에 배포 도메인 등록(`http://localhost:4173`, `https://oneul-eodi.vercel.app`).
+2. 플랫폼 → Web → 사이트 도메인에 배포 도메인 등록(`http://localhost:4173`, `https://oneul-eodi-five.vercel.app`).
 3. 앱 **내 설정 → 지도 설정**에 키 입력 → 새로고침.
 
 키가 없거나 도메인 미등록·SDK 실패 시 **자동으로 Leaflet 지도로 폴백**하고 핀·클러스터·상세는 그대로 동작합니다.
