@@ -8,8 +8,8 @@
  * 여기 값은 '기본값'이고, 브라우저에 저장된 설정이 있으면 그것이 우선합니다.
  */
 window.ENV = Object.assign({
-  SUPABASE_URL: '',
-  SUPABASE_ANON_KEY: '',
+  SUPABASE_URL: 'https://zuvmjsfxuosdxhpdhhwh.supabase.co',
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1dm1qc2Z4dW9zZHhocGRoaHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU0ODI1MDQsImV4cCI6MjExMTA1ODUwNH0.8Ag4ZASXMWR0tQC31Wly2TjnbloE1YWL1RcAoWm7cEU',
   KAKAO_MAP_KEY: '',
   // 타일 서버를 바꾸고 싶을 때 (기본: OpenStreetMap 공개 타일)
   TILE_URL: '',

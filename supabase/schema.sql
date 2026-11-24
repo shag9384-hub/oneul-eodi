@@ -116,6 +116,12 @@ create policy suggestions_insert_all on public.suggestions
     and char_length(contact) <= 80
   );
 
+-- ── 5-1. anon/authenticated 역할 테이블 권한 부여 ─────────
+grant usage on schema public to anon, authenticated;
+grant select, insert on public.places, public.reports, public.comments to anon, authenticated;
+grant insert on public.suggestions to anon, authenticated;
+grant select on public.place_live_state to anon, authenticated;
+
 -- ── 6. 운영 편의: 오래된 제보 정리용 뷰 ───────────────────
 create or replace view public.place_live_state as
 select
