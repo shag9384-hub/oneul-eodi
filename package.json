@@ -1,0 +1,12 @@
+{
+  "name": "oneul-eodi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "오늘어디 — 인천 푸드트럭·노점 실시간 지도 (정적 SPA + Supabase 선택 연동)",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "test": "node tests/unit.test.mjs",
+    "e2e": "python3 tests/e2e.py"
+  },
+  "type": "module"
+}

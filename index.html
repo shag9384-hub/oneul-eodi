@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+<title>오늘어디 — 인천 푸드트럭·노점 실시간 지도</title>
+<meta name="description" content="인천 붕어빵·호떡·순대·꼬치·타코야키 푸드트럭과 노점이 지금 어디에 떴는지 실시간 지도에서 확인하세요. 지금 있어요 제보와 한줄평으로 오늘의 위치를 함께 채웁니다.">
+<meta name="theme-color" content="#FAF7F2">
+<meta property="og:type" content="website">
+<meta property="og:title" content="오늘어디 — 인천 푸드트럭·노점 실시간 지도">
+<meta property="og:description" content="오늘 인천 어디에 떴을까? 붕어빵·순대·꼬치·타코야키 노점 위치를 실시간 제보로 확인하세요.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://oneul-eodi.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="오늘어디 — 인천 푸드트럭·노점 실시간 지도">
+<meta name="twitter:description" content="오늘 인천 어디에 떴을까? 동네 제보로 채워지는 실시간 노점 지도.">
+<meta name="twitter:image" content="https://oneul-eodi.vercel.app/assets/og.png">
+<link rel="canonical" href="https://oneul-eodi.vercel.app/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="vendor/markercluster/MarkerCluster.css">
+<link rel="stylesheet" href="vendor/markercluster/MarkerCluster.Default.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<a class="skip-link" href="#listBody">가게 목록으로 바로가기</a>
+
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="./" aria-label="오늘어디 홈">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s6.5-6.1 6.5-11A6.5 6.5 0 0 0 5.5 10c0 4.9 6.5 11 6.5 11Z" fill="currentColor"/><circle cx="12" cy="9.8" r="2.4" fill="#FAF7F2"/></svg>
+      </span>
+      <span class="brand-text">
+        <strong>오늘어디</strong>
+        <em>인천 푸드트럭·노점 실시간 지도</em>
+      </span>
+    </a>
+
+    <div class="top-right">
+      <button type="button" class="live-pill" id="livePill" title="지금 영업 중이거나 '있어요' 제보가 확인된 곳">
+        <span class="live-dot" aria-hidden="true"></span>
+        <b id="liveNum">0</b>
+        <span class="live-label">지금 떴다</span>
+      </button>
+      <button type="button" class="icon-btn" id="suggestBtn" aria-label="건의하기">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h7A2.5 2.5 0 0 1 16 5.5v5A2.5 2.5 0 0 1 13.5 13H9l-4 3v-3H6.5A2.5 2.5 0 0 1 4 10.5v-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 8h1.5A2.5 2.5 0 0 1 20 10.5v5a2.5 2.5 0 0 1-2.5 2.5H17v2.5L13.5 18" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>건의</span>
+      </button>
+      <button type="button" class="icon-btn" id="settingsBtn" aria-label="내 설정">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5 20c.7-3.6 3.5-5.6 7-5.6s6.3 2 7 5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>내 설정</span>
+      </button>
+    </div>
+  </div>
+  <div class="top-marquee" id="demoBar" hidden>
+    <span class="demo-tag">샘플 데이터</span>
+    <span id="demoBarText">미리보기용 샘플로 화면을 채웠어요. 실제 제보가 쌓이면 그대로 반영됩니다.</span>
+  </div>
+</header>
+
+<section class="filters" aria-label="필터">
+  <div class="frow" id="catRow" role="tablist" aria-label="메뉴 카테고리"></div>
+
+  <div class="frow frow-gu">
+    <div class="gu-scroll" id="guRow" role="tablist" aria-label="인천 구"></div>
+  </div>
+
+  <div class="frow frow-dong" id="dongRow" hidden>
+    <span class="frow-label">동네</span>
+    <div class="dong-scroll" id="dongChips" role="tablist" aria-label="동"></div>
+  </div>
+
+  <div class="search-row">
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.2" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" inputmode="search" autocomplete="off" placeholder="가게명, 메뉴, 동네, 아파트·역 이름으로 검색">
+      <button type="button" class="search-clear" id="searchClear" aria-label="검색 지우기" hidden>✕</button>
+    </label>
+    <div class="mode-chip" id="modeChip" title="데이터 저장 방식">불러오는 중</div>
+  </div>
+</section>
+
+<main class="stage">
+  <div class="map-wrap">
+    <div id="map" class="map" role="application" aria-label="인천 푸드트럭·노점 지도"></div>
+    <div class="map-topbar">
+      <span class="map-legend"><i class="dot live"></i>지금 있어요</span>
+      <span class="map-legend"><i class="dot open"></i>영업 중</span>
+      <span class="map-legend"><i class="dot closed"></i>영업 전·휴무</span>
+    </div>
+    <div class="map-ctrls">
+      <button type="button" class="map-ctr" id="locateBtn" aria-label="내 위치로 이동" title="내 위치로 이동">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="7.4" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 3"/><path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+      <button type="button" class="map-ctr" id="recenterBtn" aria-label="인천 전체 보기" title="인천 전체 보기">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <button type="button" class="report-fab" id="addBtn">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      가게 제보
+    </button>
+    <div class="pick-hint" id="pickHint" hidden>
+      <b>지도를 눌러 가게 위치를 찍어주세요</b>
+      <button type="button" class="link-btn" id="pickCancel">취소</button>
+    </div>
+    <div class="map-fallback" id="mapFallback" hidden>
+      <p>지도를 불러오지 못했어요.</p>
+      <p class="small">목록과 상세 정보는 그대로 사용할 수 있어요.</p>
+    </div>
+  </div>
+
+  <aside class="sheet" id="sheet" aria-label="가게 목록">
+    <button type="button" class="sheet-grab" id="sheetGrab" aria-label="목록 펼치기·접기"><span></span></button>
+
+    <div class="sheet-head">
+      <div class="sheet-tabs" role="tablist">
+        <button type="button" class="sheet-tab is-active" data-tab="today" role="tab" aria-selected="true">오늘 뜰 예정 <b id="todayCount">0</b></button>
+        <button type="button" class="sheet-tab" data-tab="fav" role="tab" aria-selected="false">즐겨찾기 <b id="favCount">0</b></button>
+      </div>
+      <button type="button" class="link-btn" id="toggleAll">전체 보기</button>
+    </div>
+
+    <p class="sheet-note" id="sheetNote">오늘 인천, 어디에 떴을까요?</p>
+
+    <div class="sheet-body" id="listBody"></div>
+
+    <div class="sheet-foot">
+      <div class="sf-text">
+        <b>오늘 본 트럭이 있나요?</b>
+        <span>제보하면 30초 만에 지도에 올라가요.</span>
+      </div>
+      <button type="button" class="btn btn-soft" data-act="add">＋ 제보하기</button>
+    </div>
+  </aside>
+</main>
+
+<!-- ── 가게 상세 ─────────────────────────────────────────── -->
+<div class="scrim" id="scrim" hidden></div>
+
+<section class="modal" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle" hidden>
+  <div class="modal-grab" aria-hidden="true"><span></span></div>
+  <header class="modal-head">
+    <div class="mh-left">
+      <span class="mh-emoji" id="detailEmoji">🍢</span>
+      <div>
+        <p class="eyebrow" id="detailEyebrow">노점 · 꼬치</p>
+        <h2 id="detailTitle">가게명</h2>
+      </div>
+    </div>
+    <button type="button" class="close-btn" data-close aria-label="닫기">✕</button>
+  </header>
+  <div class="modal-body" id="detailBody"></div>
+</section>
+
+<!-- ── 가게 제보 ─────────────────────────────────────────── -->
+<section class="modal" id="addModal" role="dialog" aria-modal="true" aria-labelledby="addTitle" hidden>
+  <div class="modal-grab" aria-hidden="true"><span></span></div>
+  <header class="modal-head">
+    <div class="mh-left">
+      <span class="mh-emoji">＋</span>
+      <div>
+        <p class="eyebrow">당신의 한 마디가 지도를 채워요</p>
+        <h2 id="addTitle">가게 제보하기</h2>
+      </div>
+    </div>
+    <button type="button" class="close-btn" data-close aria-label="닫기">✕</button>
+  </header>
+  <div class="modal-body">
+    <form id="addForm" class="form" novalidate>
+      <div class="field">
+        <label for="fName">가게·트럭 이름 <span class="req">필수</span></label>
+        <input id="fName" name="name" type="text" maxlength="40" placeholder="예: 송도 센트럴파크 붕어빵 트럭" required>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="fCategory">메뉴 <span class="req">필수</span></label>
+          <select id="fCategory" name="category" required></select>
+        </div>
+        <div class="field">
+          <label for="fType">형태</label>
+          <select id="fType" name="type">
+            <option>푸드트럭</option><option>노점</option><option>매장</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="fGu">구 <span class="req">필수</span></label>
+          <select id="fGu" name="gu" required></select>
+        </div>
+        <div class="field">
+          <label for="fDong">동네</label>
+          <input id="fDong" name="dong" type="text" maxlength="20" placeholder="예: 송도동" list="dongList">
+          <datalist id="dongList"></datalist>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="fAddress">위치 설명 <span class="req">필수</span></label>
+        <input id="fAddress" name="address_desc" type="text" maxlength="80" placeholder="예: 센트럴파크 1호관 맞은편, 현대아울렛 2번 출구 앞">
+      </div>
+
+      <div class="field">
+        <label>지도 위치</label>
+        <div class="pick-row">
+          <button type="button" class="btn btn-soft" id="pickOnMap">지도에서 핀 찍기</button>
+          <span class="pick-coord" id="pickCoord">아직 위치를 찍지 않았어요</span>
+        </div>
+        <p class="hint">핀을 찍으면 지도에 바로 표시돼요. 나중에 '위치 수정 제보'로 고칠 수 있어요.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label>나오는 요일</label>
+          <div class="day-chips" id="fDays" role="group" aria-label="요일 선택">
+            <button type="button" data-day="월">월</button><button type="button" data-day="화">화</button>
+            <button type="button" data-day="수">수</button><button type="button" data-day="목">목</button>
+            <button type="button" data-day="금">금</button><button type="button" data-day="토">토</button>
+            <button type="button" data-day="일">일</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fHours">영업 시간</label>
+          <input id="fHours" name="hours" type="text" maxlength="30" placeholder="예: 15:00~21:00">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="fMenu">대표 메뉴·한 줄 소개</label>
+        <input id="fMenu" name="menu_note" type="text" maxlength="80" placeholder="예: 팥 붕어빵 3개 2,000원, 슈크림도 있어요">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">이 위치로 제보하기</button>
+      <p class="form-foot">제보는 익명으로 등록되고, 지도에 바로 표시돼요.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ── 건의하기 ─────────────────────────────────────────── -->
+<section class="modal" id="suggestModal" role="dialog" aria-modal="true" aria-labelledby="suggestTitle" hidden>
+  <div class="modal-grab" aria-hidden="true"><span></span></div>
+  <header class="modal-head">
+    <div class="mh-left">
+      <span class="mh-emoji">✎</span>
+      <div>
+        <p class="eyebrow">오늘어디를 더 쓸모 있게</p>
+        <h2 id="suggestTitle">건의하기</h2>
+      </div>
+    </div>
+    <button type="button" class="close-btn" data-close aria-label="닫기">✕</button>
+  </header>
+  <div class="modal-body">
+    <form id="suggestForm" class="form" novalidate>
+      <div class="field">
+        <label for="sKind">무엇에 대한 건의인가요?</label>
+        <select id="sKind" name="kind">
+          <option>가게 정보 수정</option>
+          <option>새 기능 아이디어</option>
+          <option>불편한 점</option>
+          <option>광고·제휴 문의</option>
+          <option>기타</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sMessage">내용 <span class="req">필수</span></label>
+        <textarea id="sMessage" name="message" rows="5" maxlength="500" placeholder="예: 송도 붕어빵 트럭이 요즘 6시에 나와요. 시간이 바뀐 것 같아요." required></textarea>
+        <span class="counter" id="sCount">0 / 500</span>
+      </div>
+      <div class="field">
+        <label for="sContact">연락받을 곳 (선택)</label>
+        <input id="sContact" name="contact" type="text" maxlength="60" placeholder="인스타 아이디나 연락처 (답변이 필요할 때만)">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">건의 보내기</button>
+    </form>
+  </div>
+</section>
+
+<!-- ── 내 설정 ─────────────────────────────────────────── -->
+<section class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" hidden>
+  <div class="modal-grab" aria-hidden="true"><span></span></div>
+  <header class="modal-head">
+    <div class="mh-left">
+      <span class="mh-emoji">⚙</span>
+      <div>
+        <p class="eyebrow">익명으로 참여하는 동네 지도</p>
+        <h2 id="settingsTitle">내 설정</h2>
+      </div>
+    </div>
+    <button type="button" class="close-btn" data-close aria-label="닫기">✕</button>
+  </header>
+  <div class="modal-body">
+    <div class="settings-block">
+      <h3>닉네임</h3>
+      <p class="hint">한줄평과 제보에 이 이름이 붙어요. 비워두면 '익명'으로 올라가요.</p>
+      <div class="row-gap">
+        <input id="setNick" type="text" maxlength="16" placeholder="예: 송도붕어빵러버">
+        <button type="button" class="btn btn-soft" id="saveNick">저장</button>
+      </div>
+    </div>
+
+    <div class="settings-block">
+      <h3>지도 설정</h3>
+      <p class="hint">카카오맵 JavaScript 키를 넣으면 기본 지도가 카카오맵으로 바뀌어요. 키가 없으면 무료 기본 지도(Leaflet·CARTO)로 동작합니다.</p>
+      <div class="row-gap">
+        <input id="setKakao" type="text" placeholder="카카오 JavaScript 키" autocomplete="off">
+        <button type="button" class="btn btn-soft" id="saveKakao">적용</button>
+      </div>
+    </div>
+
+    <div class="settings-block">
+      <h3>데이터 연결</h3>
+      <p class="hint">Supabase URL·anon key를 넣으면 제보가 여러 사람에게 실시간으로 공유돼요. 비워두면 이 기기에만 저장됩니다.</p>
+      <div class="stack">
+        <input id="setSbUrl" type="url" placeholder="https://xxxx.supabase.co" autocomplete="off">
+        <input id="setSbKey" type="text" placeholder="anon public key" autocomplete="off">
+      </div>
+      <div class="row-gap">
+        <button type="button" class="btn btn-soft" id="saveSb">연결하기</button>
+        <button type="button" class="btn btn-ghost" id="testSb">연결 확인</button>
+      </div>
+      <p class="status-line" id="sbStatus">현재: 이 기기 저장 모드</p>
+    </div>
+
+    <div class="settings-block">
+      <h3>내 기록</h3>
+      <p class="hint">즐겨찾기·내가 올린 제보·한줄평을 파일로 내려받거나, 이 기기의 기록을 지울 수 있어요.</p>
+      <div class="row-gap">
+        <button type="button" class="btn btn-soft" id="exportBtn">내 기록 내려받기</button>
+        <button type="button" class="btn btn-ghost danger" id="resetBtn">기기 기록 지우기</button>
+      </div>
+    </div>
+
+    <p class="settings-foot">오늘어디는 로그인 없이 쓰는 동네 지도예요. 전화번호·이메일 같은 개인정보는 받지 않습니다.</p>
+  </div>
+</section>
+
+<div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
+
+<script src="js/config.js"></script>
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="vendor/markercluster/leaflet.markercluster.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
