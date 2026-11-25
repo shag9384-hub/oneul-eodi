@@ -6,11 +6,15 @@ export const CATEGORIES = [
   { name: '전체', emoji: '', key: '전체' },
   { name: '붕어빵·호떡', emoji: '🐟', key: '붕어빵·호떡' },
   { name: '순대', emoji: '🍲', key: '순대' },
+  { name: '곱창', emoji: '🥘', key: '곱창' },
   { name: '꼬치', emoji: '🍢', key: '꼬치' },
-  { name: '통닭·바베큐', emoji: '🍗', key: '통닭·바베큐' },
+  { name: '통닭·바베큐', emoji: '🔥', key: '통닭·바베큐' },
+  { name: '닭강정', emoji: '🍗', key: '닭강정' },
+  { name: '보쌈·고기', emoji: '🥩', key: '보쌈·고기' },
   { name: '타코야키', emoji: '🐙', key: '타코야키' },
   { name: '떡볶이·분식', emoji: '🍜', key: '떡볶이·분식' },
-  { name: '곱창', emoji: '🥘', key: '곱창' },
+  { name: '소금빵·빵', emoji: '🥐', key: '소금빵·빵' },
+  { name: '해산물·초밥', emoji: '🦐', key: '해산물·초밥' },
   { name: '디저트·간식', emoji: '🍪', key: '디저트·간식' },
   { name: '기타', emoji: '🥡', key: '기타' }
 ];
