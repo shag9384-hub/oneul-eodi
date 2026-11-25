@@ -3,7 +3,7 @@
  *  설정 시: 카카오맵 SDK (같은 인터페이스로 교체)
  */
 
-import { STATUS_META, esc } from './util.js';
+import { STATUS_META, CATEGORY_META, esc } from './util.js';
 
 export const INCHEON_CENTER = { lat: 37.4563, lng: 126.7052 };
 export const INCHEON_ZOOM = 12;
@@ -11,10 +11,9 @@ export const INCHEON_ZOOM = 12;
 const TILE_URL = (window.ENV && window.ENV.TILE_URL) || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const TILE_ATTR = (window.ENV && window.ENV.TILE_ATTR) || '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> 기여자';
 
-const CAT_EMOJI = {
-  '붕어빵·호떡': '🐟', '순대': '🍲', '꼬치': '🍢', '통닭·바베큐': '🍗',
-  '타코야키': '🐙', '떡볶이·분식': '🍜', '곱창': '🥘', '디저트·간식': '🍪', '기타': '🥡'
-};
+const CAT_EMOJI = Object.fromEntries(
+  Object.values(CATEGORY_META).filter(c => c.key !== '전체').map(c => [c.key, c.emoji])
+);
 
 function pinClass(status) {
   if (status === 'live') return 'pin-live';
