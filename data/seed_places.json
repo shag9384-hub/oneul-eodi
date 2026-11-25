@@ -1407,5 +1407,24 @@
     "menu_note": "쿠바노 스테이크·그릴 샌드위치 (2022년 등록, 행정복지센터 야외주차장 지정장소)",
     "source_url": "https://statnorth.kr/restaurants/%EC%9D%B8%EC%B2%9C/%EC%97%B0%EC%88%98%EA%B5%AC/%EB%8D%94%EA%B7%B8%EB%A6%B4%EB%93%9C-%EC%BF%A0%EB%B0%94%EB%85%B8%EC%8A%A4-ad2377eae70c",
     "source_title": "더그릴드 쿠바노스 — 인천 연수구 푸드트럭 | 스탯노스"
+  },
+  {
+    "id": "incheon-077",
+    "name": "백암 전통 순대 트럭",
+    "category": "순대",
+    "type": "푸드트럭",
+    "gu": "서구",
+    "dong": "가정동",
+    "address_desc": "봉오대로283번길 6 가정뉴서울아파트 단지 앞 주차장 쪽 (가정동 284-401)",
+    "lat": 37.52497,
+    "lng": 126.6818,
+    "coord_verified": true,
+    "days": [
+      "수"
+    ],
+    "hours": "",
+    "menu_note": "매주 수요일 저녁 단지 앞에 서는 순대트럭 — 순대·국산돼지 내장·허파·간까지 푸짐하게 (2026-11-25 20시 현장 확인)",
+    "source_url": "",
+    "source_title": "가정뉴서울아파트 주민 현장 제보 (2026-11-25)"
   }
 ]
