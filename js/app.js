@@ -1,7 +1,7 @@
 /* 오늘어디 — 앱 셸 (필터 · 지도 · 목록 · 상세 · 제보) */
 
 import {
-  CATEGORIES, CATEGORY_META, GU_FILTERS, KOR_DAYS, STATUS_META,
+  CATEGORIES, CATEGORY_META, GU_FILTERS, GU_OPTIONS, KOR_DAYS, STATUS_META,
   esc, debounce, clamp, haversine, fmtDistance, normalizeDays,
   parseHours, computeStatus, isLiveNow, latestReportOf, timeAgo,
   shortHours, fmtHM, naverMapLink, kakaoMapLink, sourceHost, todayLabel, timeLabel, copyText
@@ -620,8 +620,8 @@ function populateAddForm() {
   }
   const gu = $('#fGu');
   if (!gu.options.length) {
-    gu.innerHTML = GU_FILTERS.filter(g => g.match.length)
-      .map(g => `<option value="${esc(g.match[0])}">${esc(g.name)}</option>`).join('');
+    gu.innerHTML = GU_OPTIONS
+      .map(g => `<option value="${esc(g)}">${esc(g)}</option>`).join('');
   }
   const dl = $('#dongList');
   const dongs = Array.from(new Set(store.places.map(p => p.dong).filter(Boolean)));

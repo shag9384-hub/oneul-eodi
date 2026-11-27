@@ -36,6 +36,12 @@ export const GU_FILTERS = [
   { name: '강화·옹진', match: ['강화군', '옹진군'] }
 ];
 
+// 제보 폼의 '구' 선택지 — 2026-07-01 개편 기준 현행 자치구·군
+export const GU_OPTIONS = [
+  '연수구', '남동구', '부평구', '미추홀구', '서해구', '검단구',
+  '계양구', '제물포구', '영종구', '강화군', '옹진군'
+];
+
 export const STATUS_META = {
   live: { label: '지금 있어요', cls: 's-live', rank: 0 },
   open: { label: '오늘 영업일', cls: 's-open', rank: 1 },
