@@ -24,6 +24,123 @@
 <link rel="stylesheet" href="vendor/markercluster/MarkerCluster.css">
 <link rel="stylesheet" href="vendor/markercluster/MarkerCluster.Default.css">
 <link rel="stylesheet" href="css/app.css">
+<!-- AI 검색·검색엔진 구조화 데이터 (JSON-LD) — 화면·기존 메타는 건드리지 않음 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://oneul-eodi-five.vercel.app/#website",
+      "url": "https://oneul-eodi-five.vercel.app/",
+      "name": "오늘어디",
+      "alternateName": "인천 푸드트럭·겨울간식·노점 실시간 지도",
+      "description": "인천 전역 107곳의 푸드트럭·노점·겨울간식 가게를 지도에서 찾고, '지금 있어요' 제보와 한줄평으로 오늘의 영업 위치를 함께 채우는 실시간 로컬 지도.",
+      "inLanguage": "ko-KR",
+      "publisher": { "@id": "https://oneul-eodi-five.vercel.app/#publisher" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://oneul-eodi-five.vercel.app/#publisher",
+      "name": "오늘어디",
+      "url": "https://oneul-eodi-five.vercel.app/",
+      "areaServed": { "@type": "AdministrativeArea", "name": "인천광역시" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://oneul-eodi-five.vercel.app/#page",
+      "url": "https://oneul-eodi-five.vercel.app/",
+      "name": "오늘어디 — 인천 푸드트럭·노점 실시간 지도",
+      "inLanguage": "ko-KR",
+      "isPartOf": { "@id": "https://oneul-eodi-five.vercel.app/#website" },
+      "about": { "@type": "Thing", "name": "인천 푸드트럭·노점·겨울간식" },
+      "spatialCoverage": "인천광역시 연수구·남동구·부평구·중구·미추홀구·계양구·영종구·서구·검단구·강화군·서해구·제물포구·동구"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://oneul-eodi-five.vercel.app/#faq",
+      "isPartOf": { "@id": "https://oneul-eodi-five.vercel.app/#website" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "인천 송도 겨울간식 푸드트럭은 어디에 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "오늘어디 지도에서 연수구(31곳, 송도동 포함)를 고르면 겨울간식·잉어빵·호떡 가게의 위치와 영업시간이 한 번에 나옵니다. 실제 영업 위치는 이용자의 '지금 있어요' 제보로 계속 갱신되니 방문 전 지도에서 확인하세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "인천 부평에서 잉어빵·호떡 파는 곳이 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "부평구에 14곳이 등록되어 있습니다. 겨울간식 카테고리 27곳 중 부평구 지점을 지도에서 구·동·메뉴 필터로 바로 볼 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "지금 문 연 인천 푸드트럭만 보고 싶어요.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "상단 '지금 떴다' 숫자가 영업 중이거나 '있어요' 제보가 확인된 가게 수를 실시간으로 보여줍니다. 지도에 표시된 위치와 한줄평을 함께 보면 오늘 문 연 곳을 가려내기 쉽습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "가게 위치가 틀렸거나 새 가게를 알려주고 싶어요.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "지도·목록의 '가게 제보하기'에서 이름·위치·메뉴를 보내면 검토 후 반영됩니다. 방문한 가게에는 한줄평으로 오늘의 위치와 메뉴를 남길 수 있습니다."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://oneul-eodi-five.vercel.app/#districts",
+      "name": "인천 구·군별 푸드트럭·겨울간식·노점 등록 수",
+      "description": "오늘어디에 등록된 인천 13개 구·군별 가게 수(전체 107곳).",
+      "numberOfItems": 13,
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "연수구 (송도·연수·청학) 31곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": "남동구 (구월·논현·만수) 19곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 3, "name": "부평구 (부평·삼산·갈산) 14곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 4, "name": "중구 (신포·송월·영종도) 10곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 5, "name": "미추홀구 (주안·용현) 8곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 6, "name": "계양구 (작전·계산) 7곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 7, "name": "영종구 (운서·영종하늘도시) 5곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 8, "name": "서구 (검암·청라) 3곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 9, "name": "검단구 (당하·마전) 3곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 10, "name": "강화군 (강화읍·교동) 2곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 11, "name": "서해구 (원당·가정) 2곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 12, "name": "제물포구 2곳", "url": "https://oneul-eodi-five.vercel.app/" },
+        { "@type": "ListItem", "position": 13, "name": "동구 (송현·만석) 1곳", "url": "https://oneul-eodi-five.vercel.app/" }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://oneul-eodi-five.vercel.app/#categories",
+      "name": "오늘어디 메뉴 카테고리별 등록 수",
+      "numberOfItems": 12,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "겨울간식·잉어빵·호떡 27곳" },
+        { "@type": "ListItem", "position": 2, "name": "디저트·간식 13곳" },
+        { "@type": "ListItem", "position": 3, "name": "떡볶이·분식 10곳" },
+        { "@type": "ListItem", "position": 4, "name": "닭강정 8곳" },
+        { "@type": "ListItem", "position": 5, "name": "타코야키 7곳" },
+        { "@type": "ListItem", "position": 6, "name": "순대 6곳" },
+        { "@type": "ListItem", "position": 7, "name": "곱창 5곳" },
+        { "@type": "ListItem", "position": 8, "name": "소금빵·빵 5곳" },
+        { "@type": "ListItem", "position": 9, "name": "해산물·초밥 4곳" },
+        { "@type": "ListItem", "position": 10, "name": "보쌈·고기 3곳" },
+        { "@type": "ListItem", "position": 11, "name": "통닭·바베큐 2곳" },
+        { "@type": "ListItem", "position": 12, "name": "꼬치 2곳" }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 

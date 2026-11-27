@@ -1,26 +1,55 @@
+# 오늘어디 (https://oneul-eodi-five.vercel.app)
+# 인천 푸드트럭·노점·겨울간식 107곳 실시간 지도
+# AI 검색(챗GPT·퍼플렉시티·클로드)의 인용·추천용 봇과 검색엔진은 허용하고,
+# AI 학습용 대량 수집 봇은 막습니다.
+# AI용 사이트 요약: https://oneul-eodi-five.vercel.app/llms.txt
+
 User-agent: *
 Allow: /
 
-# AI 크롤러는 학습·수집 목적으로 쓰지 않게 막습니다.
-User-agent: GPTBot
-Disallow: /
-
+# ── AI 검색·인용 봇 (답변에서 사이트를 찾아 인용할 수 있게 허용) ──
 User-agent: OAI-SearchBot
-Disallow: /
+Allow: /
 
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# ── 검색엔진 ──
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Daum
+Allow: /
+
+# ── AI 학습용 크롤러 (계속 차단) ──
+User-agent: GPTBot
 Disallow: /
 
 User-agent: ClaudeBot
 Disallow: /
 
-User-agent: Claude-Web
-Disallow: /
-
 User-agent: anthropic-ai
-Disallow: /
-
-User-agent: PerplexityBot
 Disallow: /
 
 User-agent: Google-Extended
