@@ -112,6 +112,29 @@ ul,ol{margin:0;padding:0;list-style:none}
   flex-shrink:0;font-family:var(--mono);font-size:9px;letter-spacing:.1em;
   background:var(--amber);color:#fff;padding:2px 6px;border-radius:4px;font-weight:700;
 }
+/* 자매 사이트(인천한바퀴)로 가는 띠 — 헤더 바로 아래, 지도는 가리지 않음 */
+.cross-banner{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 14px;background:var(--amber-soft);
+  border-top:1px dashed var(--amber-line);border-bottom:1px solid var(--amber-line);
+  font-size:12.5px;font-weight:600;color:var(--amber-deep);letter-spacing:-.01em;
+  transition:background .15s ease;
+}
+.cross-banner:hover,.cross-banner:focus-visible{background:#FBE2D0}
+.cb-ico{flex:0 0 auto;font-size:14px;line-height:1}
+.cb-text{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cb-text b{font-weight:800;color:var(--ink)}
+.cb-sub{font-weight:600;color:var(--amber-deep)}
+.cb-go{
+  flex:0 0 auto;display:inline-flex;align-items:center;height:22px;padding:0 10px;
+  border-radius:999px;background:var(--amber);color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:-.01em;box-shadow:0 2px 6px rgba(234,88,12,.22);
+}
+@media (max-width:430px){ .cb-sub{display:none} }@media (max-width:359px){ .cross-banner{padding:7px 12px;gap:6px;font-size:12px} .cb-go{padding:0 8px;font-size:10.5px} }
+@media (min-width:981px){ .cross-banner{padding:9px 26px} }
+@media (min-width:1530px){
+  .cross-banner{padding-left:calc((100vw - 1480px)/2 + 26px);padding-right:calc((100vw - 1480px)/2 + 26px)}
+}
 
 /* ── Filters ───────────────────────────────────────────── */
 .filters{flex-shrink:0;background:var(--cream);padding:10px 0 9px;border-bottom:1px solid var(--line);position:relative;z-index:20}
@@ -721,6 +744,8 @@ ul,ol{margin:0;padding:0;list-style:none}
   .live-label{display:none}
   .search-row .mode-chip{display:none}
   .frow-hint{display:none}
+  .cross-banner .cb-go{display:none}
+  .cross-banner::after{content:"→";flex:0 0 auto;color:var(--amber);font-weight:800}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
