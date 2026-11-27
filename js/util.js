@@ -21,15 +21,19 @@ export const CATEGORIES = [
 
 export const CATEGORY_META = Object.fromEntries(CATEGORIES.map(c => [c.key, c]));
 
+// 2026-07-01 인천 행정체제 개편(2군 9구) 반영 —
+// 기존 중구는 제물포구·영종구로, 서구는 서해구·검단구로 나뉘었습니다.
 export const GU_FILTERS = [
   { name: '전체 인천', match: [] },
   { name: '연수구', match: ['연수구'] },
   { name: '남동구', match: ['남동구'] },
   { name: '부평구', match: ['부평구'] },
   { name: '미추홀구', match: ['미추홀구'] },
-  { name: '서구', match: ['서구'] },
+  { name: '서해구·검단구', match: ['서구', '서해구', '검단구'] },
   { name: '계양구', match: ['계양구'] },
-  { name: '중구·동구', match: ['중구', '동구', '제물포구'] }
+  { name: '제물포구·동구', match: ['중구', '동구', '제물포구'] },
+  { name: '영종구', match: ['영종구'] },
+  { name: '강화·옹진', match: ['강화군', '옹진군'] }
 ];
 
 export const STATUS_META = {

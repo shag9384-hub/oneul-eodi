@@ -5,7 +5,7 @@
 
 - 라이브(예정) 주소: `https://oneul-eodi-five.vercel.app`
 - 빌드 없음 — `index.html`을 그대로 올리면 Vercel·Netlify·GitHub Pages 어디서든 동작합니다.
-- 초기 데이터: 인천 8개 구 **76곳** (`data/seed_places.json`, 출처 링크 포함) — 2026-11-25 인기 푸드트럭 25곳 추가
+- 데이터: 인천 전역 **107곳** (`data/seed_places.json`, 출처 링크 포함) — 2026-11-27 100곳 돌파(겨울간식 매장·푸드트럭 30곳 추가, 제물포·영종·서해·검단구 반영)
 
 ---
 
@@ -65,7 +65,7 @@ oneul-eodi/
 │  ├─ store.js           # 시드+localStorage+Supabase REST 저장소
 │  ├─ map.js             # Leaflet ↔ Kakao 어댑터
 │  └─ app.js             # 렌더링·이벤트·모달·제보 플로우
-├─ data/seed_places.json # 초기 76곳
+├─ data/seed_places.json # 107곳
 ├─ supabase/schema.sql   # 테이블 4종 + RLS 정책 + 라이브 상태 뷰
 ├─ vendor/               # Leaflet 1.9.4 · markercluster 1.5.3 (CDN 장애 대비 로컬 번들)
 ├─ tests/unit.test.mjs   # 단위 26개 (node)
@@ -136,7 +136,7 @@ node tests/unit.test.mjs        # 26개: 요일/시간 파싱·상태 계산·�
 python3 tests/e2e.py            # 81개: PC 1280×900 / 모바일 390×844 / Supabase 목 / 카카오 폴백
 ```
 
-E2E가 확인하는 것: 콘솔 에러 0 · 가로 넘침 0 · 카테고리/구/동/검색 필터 · 전체 보기 76곳 ·
+E2E가 확인하는 것: 콘솔 에러 0 · 가로 넘침 0 · 카테고리/구/동/검색 필터 · 전체 보기 107곳 ·
 상세 모달 · 투표 반영 · 한줄평 · 위치 수정 · '안 열려요' · 즐겨찾기 · 공유 클립보드 ·
 지도 핀 찍어 제보 · 새로고침 후 유지 · 500m 이내 · 요일 없는 곳 상태 · Supabase 연결/투표 POST ·
 카카오 실패 폴백. 스크린샷은 `downloads/oneul_eodi_*.png`에 저장됩니다.
